@@ -20,6 +20,7 @@ import {
   TopGamesTitle
 } from './styles';
 import { UserFollowedStreamCard } from '../../components/UserFollowedStreamCard';
+import { Loader } from '../../components/Loader';
 
 interface TopGames {
   box_art_url: string, 
@@ -129,11 +130,10 @@ export function Home() {
         </UserInfo>
 
         <SignOutButton onPress={handleSignOut}>
-          {isLoggingOut ? 
-            <ActivityIndicator size={20} color={theme.colors.white} />
-            :
-            <Feather name='power' size={24} color={theme.colors.white}/>
-        }
+          {isLoggingOut 
+            ? <Loader size={20} />
+            : <Feather name='power' size={24} color={theme.colors.white}/>
+          }
         </SignOutButton>
       </Header>
 

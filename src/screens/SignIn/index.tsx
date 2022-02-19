@@ -1,25 +1,26 @@
 import React from 'react';
 import { useTheme } from 'styled-components';
 import { Fontisto } from '@expo/vector-icons'
-import { ActivityIndicator, Alert, Modal, View } from 'react-native';
+import { Alert, Modal, View } from 'react-native';
 
 import { useAuth } from '../../hooks/useAuth';
 
 import LoginBannerImg from '../../assets/images/login.svg';
 import LogoImg from '../../assets/images/logo.svg';
 
-import { 
+import {
   Container,
   Content,
-  LoginBanner, 
-  LoginInfo, 
-  Header, 
-  Partner, 
-  Description, 
+  LoginBanner,
+  LoginInfo,
+  Header,
+  Partner,
+  Description,
   SignInButton,
   SignInButtonIcon,
-  SignInButtonText 
+  SignInButtonText
 } from './styles';
+import { Loader } from '../../components/Loader';
 
 export function SignIn() {
   const { signIn, isLoggingIn } = useAuth();
@@ -70,11 +71,10 @@ export function SignIn() {
 
           <SignInButton onPress={handleSignIn}>
             <SignInButtonIcon>
-              {isLoggingIn ? (
-                <ActivityIndicator size={20} color={theme.colors.white} />
-              ) : (
-                <Fontisto name="twitch" size={20} color={theme.colors.white} style={{marginRight: 1}} />
-              )}
+              {isLoggingIn 
+                ? <Loader size={20} />
+                : <Fontisto name="twitch" size={20} color={theme.colors.white} style={{marginRight: 1}} />
+              }
             </SignInButtonIcon>
 
             <SignInButtonText>
@@ -84,7 +84,7 @@ export function SignIn() {
         </LoginInfo>
       </Content>
 
-      <Modal 
+      <Modal
         animationType="fade"
         visible={isLoggingIn}
         statusBarTranslucent
